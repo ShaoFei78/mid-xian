@@ -1,11 +1,11 @@
 #the mod name as displayed in-game
-displayName: "Java Mod Template"
+displayName: "Xian Time"
 
 #the internal name of your mod
-name: "example-java-mod"
+name: "xian time"
 
 #your name
-author: "You"
+author: "ShaoFei"
 
 #the fully qualified main class of the mod
 main: "example.ExampleJavaMod"
