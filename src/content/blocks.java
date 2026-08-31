@@ -15,7 +15,7 @@ public class blocks {
             requirements(Category.crafting, ItemStack.with(Items.copper,50,Items.lead,50,ModItem.Lowest_LingShi,10));
             alwaysUnlocked=true;
             craftEffect= Fx.pulverizeMedium;
-            outputItem=new ItemStack(ModItem.Lowest_LingShi,1);
+            outputItem=new ItemStack(ModItem.ChiTong,1);
             consumeItem(Items.copper,2);
             size=2;
             craftTime=50f;
