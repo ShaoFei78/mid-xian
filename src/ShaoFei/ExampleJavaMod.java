@@ -6,6 +6,7 @@ import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
 import content.ModItem;
+import content.blocks;
 
 public class ExampleJavaMod extends Mod{
 
@@ -30,6 +31,7 @@ public class ExampleJavaMod extends Mod{
     public void loadContent(){
         Log.info("Loading some example content.");
         ModItem.load();
+        blocks.load();
     }
 
 }
