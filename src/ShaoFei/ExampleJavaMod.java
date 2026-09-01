@@ -9,7 +9,7 @@ import mindustry.ui.dialogs.*;
 import content.ModItem;
 import content.Turrets;
 import content.Blocks;
-import content.ModTechTree;
+import content.MyTechTree;
 
 public class ExampleJavaMod extends Mod{
 
@@ -36,7 +36,8 @@ public class ExampleJavaMod extends Mod{
         ModItem.load();
         Blocks.load();
         Turrets.load();
-        ModTechTree.load();
+        MyTechTree.load();
+
 
     }
 

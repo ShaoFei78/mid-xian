@@ -5,7 +5,7 @@ import mindustry.content.TechTree;
 import mindustry.game.Objectives;
 import mindustry.type.ItemStack;
 
-public class ModTechTree {
+public class MyTechTree {
 
     public static void load(){
 
