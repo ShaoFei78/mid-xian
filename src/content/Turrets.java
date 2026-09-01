@@ -1,12 +1,13 @@
 package content;
 
+import arc.audio.Sound;
+import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.part.DrawPart;
 import mindustry.entities.part.RegionPart;
 import mindustry.entities.pattern.ShootAlternate;
-import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
@@ -18,6 +19,8 @@ public class Turrets {
 
     //赤铜双管炮：以原版双管炮(Duo)为原型，伤害与弹容量翻倍
     public static Block ChiTong_Duo;
+    //自定义射击音效：直接从 mod 文件树加载 assets/sound/shoot/shootChiTong_Duo.ogg
+    public static Sound shootChiTong_Duo = new Sound(Vars.tree.get("sound/shoot/shootChiTong_Duo.ogg"));
 
     public static void load(){
         ChiTong_Duo = new ItemTurret("ChiTong_Duo"){{
@@ -74,7 +77,7 @@ public class Turrets {
             shoot = new ShootAlternate(3.5f);
             recoils = 2;
             maxAmmo = 60; //原版默认30，翻倍
-            shootSound = Sounds.shootDuo;
+            shootSound = shootChiTong_Duo; //使用自定义射击音效
             recoil = 0.5f;
             shootY = 3f;
             reload = 20f;
