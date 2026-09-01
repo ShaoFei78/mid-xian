@@ -22,6 +22,7 @@ public class Turrets {
     public static void load(){
         ChiTong_Duo = new ItemTurret("ChiTong_Duo"){{
             requirements(Category.turret, ItemStack.with(ModItem.ChiTong, 35, ModItem.Lowest_LingShi, 5));
+            alwaysUnlocked=false;
 
             //弹药类型与原版双管炮相同：铜、石墨、硅；伤害均为原版的2倍
             ammo(

@@ -13,7 +13,7 @@ public class Blocks {
     public static void load(){
         JingLianChang=new GenericCrafter("JingLianChang"){{
             requirements(Category.crafting, ItemStack.with(Items.copper,50,Items.lead,50,ModItem.Lowest_LingShi,10));
-            alwaysUnlocked=true;
+            alwaysUnlocked=false;
             craftEffect= Fx.pulverizeMedium;
             outputItem=new ItemStack(ModItem.ChiTong,1);
             consumeItem(Items.copper,2);
