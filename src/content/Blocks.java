@@ -7,7 +7,7 @@ import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.GenericCrafter;
 
-public class blocks {
+public class Blocks {
     //炼器材料处理
     public static Block JingLianChang;
     public static void load(){
