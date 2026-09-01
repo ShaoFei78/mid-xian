@@ -93,13 +93,13 @@ public class Turrets {
             //双炮管外观：左右两根炮管零件，与原版双管炮一致
             drawer = new DrawTurret(){{
                 parts.addAll(
-                    new RegionPart("l"){{
+                    new RegionPart("-barrel-l"){{
                         progress = DrawPart.PartProgress.recoil;
                         recoilIndex = 0;
                         under = true;
                         moveY = -1.5f;
                     }},
-                    new RegionPart("r"){{
+                    new RegionPart("-barrel-r"){{
                         progress = DrawPart.PartProgress.recoil;
                         recoilIndex = 1;
                         under = true;

@@ -26,11 +26,15 @@ public class Blocks {
 
         }};
 
-        oreLowestLingShi = new OreBlock(ModItem.Lowest_LingShi){{
+        oreLowestLingShi = new OreBlock("ore-Lowest_LingShi"){{
+            //mod 物品的 name 已带 mod 前缀，必须用 OreBlock(String) 构造器并手动指定掉落物，
+            //否则会生成 "xian-time-ore-xian-time-Lowest_LingShi" 这种双重前缀名字，导致贴图找不到
+            itemDrop = ModItem.Lowest_LingShi;
             //参与默认地图生成（自建游戏、地图编辑器），机械钻头即可采集
             oreDefault = true;
             oreThreshold = 0.81f;
             oreScale = 23.5f;
+
         }};
     }
 }
