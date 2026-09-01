@@ -5,9 +5,12 @@ import mindustry.content.Items;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
+import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.production.GenericCrafter;
 
 public class Blocks {
+    //下品灵石矿：机械钻头（tier 2）即可开采
+    public static Block oreLowestLingShi;
     //炼器材料处理
     public static Block JingLianChang;
     public static void load(){
@@ -21,6 +24,13 @@ public class Blocks {
             craftTime=50f;
             hasItems=true;
 
+        }};
+
+        oreLowestLingShi = new OreBlock(ModItem.Lowest_LingShi){{
+            //参与默认地图生成（自建游戏、地图编辑器），机械钻头即可采集
+            oreDefault = true;
+            oreThreshold = 0.81f;
+            oreScale = 23.5f;
         }};
     }
 }

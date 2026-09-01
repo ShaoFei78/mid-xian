@@ -11,7 +11,7 @@ public class ModItem {
         Lowest_LingShi = new Item("Lowest_LingShi", Color.lightGray){{
             hardness=1;
             cost=0.5f;
-            alwaysUnlocked=true;
+            alwaysUnlocked=false;
         }};
         Secondary_LingShi = new Item("Secondary_LingShi", Color.blue){{
             hardness=2;
