@@ -19,8 +19,8 @@ public class Turrets {
 
     //赤铜双管炮：以原版双管炮(Duo)为原型，伤害与弹容量翻倍
     public static Block ChiTong_Duo;
-    //自定义射击音效：直接从 mod 文件树加载 assets/sound/shoot/shootChiTong_Duo.ogg
-    public static Sound shootChiTong_Duo = new Sound(Vars.tree.get("sound/shoot/shootChiTong_Duo.ogg"));
+    //自定义射击音效：官方做法，自动从 assets/sounds/ 目录加载 shootChiTong_Duo.ogg（.ogg/.mp3 自动识别，带缓存）
+    public static Sound shootChiTong_Duo = Vars.tree.loadSound("shootChiTong_Duo");
 
     public static void load(){
         ChiTong_Duo = new ItemTurret("ChiTong_Duo"){{
