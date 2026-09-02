@@ -7,6 +7,7 @@ import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.production.GenericCrafter;
+import mindustry.world.draw.DrawRegion;
 
 public class Blocks {
     //下品灵石矿：机械钻头（tier 2）即可开采
@@ -23,9 +24,10 @@ public class Blocks {
             size=2;
             craftTime=50f;
             hasItems=true;
-            warmupSpeed=0.03f;
-            updateEffect=Fx.smeltsmoke;
+            warmupSpeed=0.1f;
+            updateEffect=Fx.explosion;
             updateEffectChance=1f;
+            drawer=new DrawRegion("-top");
 
         }};
 
