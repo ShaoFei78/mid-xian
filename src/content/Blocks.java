@@ -29,7 +29,7 @@ public class Blocks {
             warmupSpeed=0.1f;
             updateEffect=Fx.explosion;
             updateEffectChance=0.2f;
-            updateEffectSpread=20f;
+            updateEffectSpread=25f;
             drawer = new DrawMulti(
                     new DrawDefault(),          // 1. 先绘制默认的底座（JingLianChang.png）
                     new DrawRegion("-top")      // 2. 再在底座上面绘制顶层（JingLianChang-top.png）
