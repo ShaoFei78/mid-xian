@@ -3,13 +3,10 @@ package ShaoFei;
 import arc.*;
 import arc.util.*;
 
+import content.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
-import content.ModItem;
-import content.Turrets;
-import content.Blocks;
-import content.MyTechTree;
 
 public class ExampleJavaMod extends Mod{
 
@@ -37,6 +34,7 @@ public class ExampleJavaMod extends Mod{
         Blocks.load();
         Turrets.load();
         MyTechTree.load();
+        ExSector.load();
 
 
     }

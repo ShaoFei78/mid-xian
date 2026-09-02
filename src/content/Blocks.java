@@ -29,7 +29,7 @@ public class Blocks {
             hasItems=true;
             warmupSpeed=0.01f;
             updateEffect=Fx.explosion;
-            updateEffectChance=0.5f;
+            updateEffectChance=0.1f;
             //生产动画：仿原版硅冶炼炉(Silicon Smelter)——主体贴图 + 随运行热度(warmup)闪烁的炉火，开炉时还会发光
             drawer = new DrawMulti(new DrawDefault(), new DrawFlame(Color.valueOf("ffb35c")){{
                 //火焰调小：缩小脉动火焰圆与其抖动幅度，并略微降低发光强度
