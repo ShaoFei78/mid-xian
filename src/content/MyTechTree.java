@@ -1,6 +1,7 @@
 package content;
 
 import mindustry.content.Items;
+import mindustry.content.SectorPresets;
 import mindustry.content.TechTree;
 import mindustry.game.Objectives;
 import mindustry.type.ItemStack;
@@ -44,5 +45,14 @@ public class MyTechTree {
             Turrets.ChiTong_Duo,
             ItemStack.empty
         );
+
+        //5. 仙遗地区(XianYi)：位于零号地区(groundZero)之后（父节点 = 零号地区）
+        //   目标：占领零号地区后自动解锁（与原版 frozenForest 紧随 groundZero 的机制一致）
+        TechTree.TechNode xianYi = new TechTree.TechNode(
+            SectorPresets.groundZero.techNode,
+            ExSector.XianYi,
+            ItemStack.empty
+        );
+        xianYi.objectives.add(new Objectives.SectorComplete(SectorPresets.groundZero));
     }
 }
