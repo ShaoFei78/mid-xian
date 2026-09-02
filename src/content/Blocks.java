@@ -7,6 +7,8 @@ import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.production.GenericCrafter;
+import mindustry.world.draw.DrawDefault;
+import mindustry.world.draw.DrawMulti;
 import mindustry.world.draw.DrawRegion;
 
 public class Blocks {
@@ -26,8 +28,12 @@ public class Blocks {
             hasItems=true;
             warmupSpeed=0.1f;
             updateEffect=Fx.explosion;
-            updateEffectChance=1f;
-            drawer=new DrawRegion("-top");
+            updateEffectChance=0.2f;
+            updateEffectSpread=20f;
+            drawer = new DrawMulti(
+                    new DrawDefault(),          // 1. 先绘制默认的底座（JingLianChang.png）
+                    new DrawRegion("-top")      // 2. 再在底座上面绘制顶层（JingLianChang-top.png）
+            );
 
         }};
 
