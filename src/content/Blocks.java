@@ -23,6 +23,9 @@ public class Blocks {
             size=2;
             craftTime=50f;
             hasItems=true;
+            warmupSpeed=0.03f;
+            updateEffect=Fx.smeltsmoke;
+            updateEffectChance=1f;
 
         }};
 
