@@ -69,9 +69,10 @@ public class Blocks {
             //等离子体动画：底座 → 主体 → 顶部 → 等离子辉光（叠加发光在最上层）
             drawer = new DrawMulti(
                 new DrawRegion("-bottom"),
+                new DrawPlasma(),
                 new DrawDefault(),
-                new DrawRegion("-top"),
-                new DrawPlasma()
+                new DrawRegion("-top")
+
             );
         }};
 
