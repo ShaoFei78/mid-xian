@@ -7,16 +7,21 @@ import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.OreBlock;
+import mindustry.world.blocks.power.ConsumeGenerator;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.draw.DrawDefault;
 import mindustry.world.draw.DrawFlame;
 import mindustry.world.draw.DrawMulti;
+import mindustry.world.draw.DrawPlasma;
+import mindustry.world.draw.DrawRegion;
 
 public class Blocks {
     //下品灵石矿：机械钻头（tier 2）即可开采
     public static Block oreLowestLingShi;
     //炼器材料处理
     public static Block JingLianChang;
+    //灵石燃烧发电机：燃烧下品灵石发电（等离子体动画，参照原版冲击反应堆的画法）
+    public static Block BurnLingShi;
     public static void load(){
         JingLianChang=new GenericCrafter("JingLianChang"){{
             requirements(Category.crafting, ItemStack.with(Items.copper,50,Items.lead,50,ModItem.Lowest_LingShi,10));
@@ -41,6 +46,33 @@ public class Blocks {
                 lightRadius = 48f;
             }});
 
+        }};
+
+        BurnLingShi = new ConsumeGenerator("BurnLingShi"){{
+            requirements(Category.power, ItemStack.with(
+                ModItem.ChiTong, 30,
+                ModItem.Lowest_LingShi, 20,
+                Items.titanium, 30,
+                Items.silicon, 30
+            ));
+            //powerProduction 单位是“每 tick”，界面显示 ×60：7 × 60 = 420 电/秒
+            powerProduction = 7f;
+            //每 60 tick（1 秒）消耗 1 个下品灵石
+            itemDuration = 60f;
+            size = 2;
+            hasItems = true;
+            generateEffect = Fx.generatespark;
+
+            //只烧下品灵石（普通 consumeItem，无需物品 flammability）
+            consumeItem(ModItem.Lowest_LingShi, 1);
+
+            //等离子体动画：底座 → 主体 → 顶部 → 等离子辉光（叠加发光在最上层）
+            drawer = new DrawMulti(
+                new DrawRegion("-bottom"),
+                new DrawDefault(),
+                new DrawRegion("-top"),
+                new DrawPlasma()
+            );
         }};
 
         oreLowestLingShi = new OreBlock("ore-Lowest_LingShi"){{

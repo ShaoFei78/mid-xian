@@ -54,5 +54,14 @@ public class MyTechTree {
             ItemStack.empty
         );
         xianYi.objectives.add(new Objectives.SectorComplete(SectorPresets.groundZero));
+
+        //6. 灵石燃烧发电机 BurnLingShi：与涡轮发电机(蒸汽发电机, steamGenerator)并列
+        //   父节点 = 蒸汽发电机的父节点（燃烧发电机）；占领仙遗(XianYi)后可用，研究需消耗灵石/赤铜/钛
+        TechTree.TechNode burnLingShi = new TechTree.TechNode(
+            mindustry.content.Blocks.steamGenerator.techNode.parent,
+            Blocks.BurnLingShi,
+            ItemStack.with(ModItem.Lowest_LingShi, 500, ModItem.ChiTong, 1000, Items.titanium, 1000)
+        );
+        burnLingShi.objectives.add(new Objectives.SectorComplete(ExSector.XianYi));
     }
 }
