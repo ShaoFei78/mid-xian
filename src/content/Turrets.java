@@ -109,9 +109,14 @@ public class Turrets {
                 }
             }};
         }};
-        MinSpellcaster=new ItemTurret("MinSpellcaster"){{
+        MinSpellcaster=new SpellcasterTurret("MinSpellcaster"){{
             requirements(Category.turret,ItemStack.with(ModItem.ChiTong, 80, ModItem.Lowest_LingShi, 20,Items.titanium,50));
             alwaysUnlocked=false;
+            //开火特效：炮口迸出小闪电（数量/伤害/长度/散角可在此微调）
+            lightningBolts = 6;
+            lightningDamage = 10f;
+            lightningLength = 7;
+            lightningSpread = 40f;
 
             ammo(
                     ModItem.ChiTong, new ArtilleryBulletType(8f,80f){{
