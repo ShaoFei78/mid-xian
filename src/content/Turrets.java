@@ -15,10 +15,7 @@ import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
-import mindustry.world.draw.DrawDefault;
-import mindustry.world.draw.DrawMulti;
-import mindustry.world.draw.DrawPlasma;
-import mindustry.world.draw.DrawTurret;
+import mindustry.world.draw.*;
 
 public class Turrets {
 
@@ -140,16 +137,18 @@ public class Turrets {
             range =250f;
             limitRange(5f);
             recoils = 2;
-            recoil = 3f;
+            recoil = 4f;
             maxAmmo = 60;
             ammoUseEffect = Fx.casing1;
-            coolant = consumeCoolant(0.3f);
+            coolant = consumeCoolant(0.2f);
             coolantMultiplier = 10f;
             health = 400;
-            rotateSpeed = 8f;
+            rotateSpeed = 15f;
             shootY = 3f;
             shootSound = Sounds.shootRipple;
             drawer = new DrawMulti(
+                    new DrawRegion("-bottom"),
+                    new DrawHeatRegion("-heat"),
 
                     new DrawPlasma(),
                     new DrawDefault()
