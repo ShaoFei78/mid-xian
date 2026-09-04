@@ -136,26 +136,25 @@ public class Turrets {
             reload = 120f;
             range =250f;
             limitRange(5f);
-            recoils = 2;
-            recoil = 4f;
+
+            recoil = 3f;
             maxAmmo = 60;
             ammoUseEffect = Fx.casing1;
             coolant = consumeCoolant(0.2f);
             coolantMultiplier = 10f;
             health = 400;
-            rotateSpeed = 15f;
+            rotateSpeed = 10f;
             shootY = 3f;
             shootSound = Sounds.shootRipple;
             targetAir = false;   // 关闭对空锁定
             targetGround = true;
-            drawer = new DrawMulti(
-                    new DrawRegion("-bottom"),
-                    new DrawHeatRegion("-heat"),
-
-                    new DrawPlasma(),
-                    new DrawDefault()
-
-            );
+            drawer = new DrawTurret(){{
+                parts.add(new RegionPart("-mid"){{
+                    progress = PartProgress.recoil;
+                    under = false;
+                    moveY = -1.25f;
+                }});
+            }};
 
         }};
     }
