@@ -146,6 +146,8 @@ public class Turrets {
             rotateSpeed = 15f;
             shootY = 3f;
             shootSound = Sounds.shootRipple;
+            targetAir = false;   // 关闭对空锁定
+            targetGround = true;
             drawer = new DrawMulti(
                     new DrawRegion("-bottom"),
                     new DrawHeatRegion("-heat"),
