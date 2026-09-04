@@ -4,21 +4,27 @@ import arc.audio.Sound;
 import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.content.Items;
+import mindustry.entities.bullet.ArtilleryBulletType;
 import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.part.DrawPart;
 import mindustry.entities.part.RegionPart;
 import mindustry.entities.pattern.ShootAlternate;
+import mindustry.entities.pattern.ShootPattern;
+import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.draw.DrawDefault;
+import mindustry.world.draw.DrawMulti;
+import mindustry.world.draw.DrawPlasma;
 import mindustry.world.draw.DrawTurret;
 
 public class Turrets {
 
     //赤铜双管炮：以原版双管炮(Duo)为原型，伤害与弹容量翻倍
     public static Block ChiTong_Duo;
+    public static Block MinSpellcaster;
     //自定义射击音效：官方做法，自动从 assets/sounds/ 目录加载 shootChiTong_Duo.ogg（.ogg/.mp3 自动识别，带缓存）
     public static Sound shootChiTong_Duo = Vars.tree.loadSound("shootChiTong_Duo");
 
@@ -105,6 +111,51 @@ public class Turrets {
                     }});
                 }
             }};
+        }};
+        MinSpellcaster=new ItemTurret("MinSpellcaster"){{
+            requirements(Category.turret,ItemStack.with(ModItem.ChiTong, 80, ModItem.Lowest_LingShi, 20,Items.titanium,50));
+            alwaysUnlocked=false;
+
+            ammo(
+                    ModItem.ChiTong, new ArtilleryBulletType(8f,80f){{
+                        width=10f;
+                        height=10f;
+                        collidesTiles = false;
+
+                        splashDamage=50f;
+                        splashDamageRadius = 50f * 0.75f;
+                        ammoMultiplier = 4f;
+                        // 4. 视觉与爆炸特效
+                        hitEffect = Fx.hitFlamePlasma; // 使用榴弹专属的爆炸特效
+                        despawnEffect = Fx.hitFlamePlasma; // 落地未命中也会爆炸
+                        hitSound = Sounds.explosion; // 落地时的爆炸音效
+                        backColor = Pal.lightOrange;
+                        frontColor = Pal.lightishOrange;
+                        trailColor = Pal.lightishOrange;
+                    }}
+            );
+            shoot=new ShootPattern();
+            size = 2;
+            reload = 120f;
+            range =250f;
+            limitRange(5f);
+            recoils = 2;
+            recoil = 3f;
+            maxAmmo = 60;
+            ammoUseEffect = Fx.casing1;
+            coolant = consumeCoolant(0.3f);
+            coolantMultiplier = 10f;
+            health = 400;
+            rotateSpeed = 8f;
+            shootY = 3f;
+            shootSound = Sounds.shootRipple;
+            drawer = new DrawMulti(
+
+                    new DrawPlasma(),
+                    new DrawDefault()
+
+            );
+
         }};
     }
 }
