@@ -7,7 +7,6 @@ import arc.math.Mathf;
 import arc.util.Time;
 import mindustry.content.Fx;
 import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.pattern.ShootPattern;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.MechUnit;
 import mindustry.gen.Sounds;
@@ -32,7 +31,7 @@ public class MyModUnits{
         //============================================================
         // 1. 月牙剑气子弹：BasicBulletType，扁平月牙 + 穿透 + 短拖尾
         //============================================================
-        BasicBulletType slashBullet = new BasicBulletType(3.5f, 16f){{
+        BasicBulletType slashBullet = new BasicBulletType(4f, 16f){{
             //美术区域名必须带 mod 前缀(xian-time-)，与贴图打包后的名字一致
             sprite = "xian-time-lunar-slash-bullet";          //月牙主体贴图
             backSprite = "xian-time-lunar-slash-bullet-back"; //月牙底层(营造厚度感)
@@ -40,8 +39,8 @@ public class MyModUnits{
             width = 18f;   //月牙宽度：扁而宽
             height = 8f;   //月牙高度：扁平
 
-            lifetime = 6f;         //飞行寿命(tick)
-            rangeOverride = 18.2f; //攻击范围 18.2（覆盖自动计算，单位会走到该距离内挥砍）
+            lifetime = 21f;         //飞行寿命(tick)：足够月牙飞满 82 距离
+            rangeOverride = 82.2f;  //攻击范围：18.2 + 8格(64单位) ≈ 82.2
 
             pierce = true;   //开启穿透：一道剑气可同时命中多个敌人
 
@@ -70,13 +69,14 @@ public class MyModUnits{
         Weapon sword = new SwordWeapon("xian-time-JianXiu-weapon"){{
             bullet = slashBullet;
 
-            reload = 26f;   //装填 26 tick → 每次挥出 2 道 × 约 2.3 次/秒 ≈ 2×2.3 发/秒
-            mirror = false; //单手单剑，不生成镜像武器
+            reload = 13f;   //双持：官方生成镜像时会把每把剑装填翻倍(13→26)，左右交替 ≈ 2×2.3 发/秒
+            mirror = true;  //双持：官方自动生成第二把(翻转)武器，左右各一把
+            alternate = true; //左右交替挥砍
             rotate = true;  //允许旋转瞄准
             rotateSpeed = 8f;
 
-            //武器(剑)挂在单位中心，剑尖方向由 -weapon 贴图决定
-            x = 0f;
+            //武器(剑)挂在身体右侧，镜像副本自动放到左侧
+            x = 4f;
             y = 0f;
             shootX = 0f;   //剑气横向偏移
             shootY = 9f;   //剑气从剑尖(身前9格? 实际9单位≈1格出头)处产生
@@ -86,15 +86,6 @@ public class MyModUnits{
 
             shootSound = Sounds.shoot; //换任意音效即可
             ejectEffect = Fx.none;
-
-            //每次挥砍出 2 道月牙，略微扇形散开
-            shoot = new ShootPattern(){
-                @Override
-                public void shoot(int totalShots, ShootPattern.BulletHandler handler, Runnable barrelIncrementer){
-                    handler.shoot(0f, 0f, -3.5f, 0f);
-                    handler.shoot(0f, 0f, 3.5f, 0f);
-                }
-            };
         }};
 
         //============================================================
@@ -154,16 +145,23 @@ public class MyModUnits{
 
             //装填相位：0=刚挥出开始，1=即将下一次挥砍（相位=1 时偏移归零）
             float p = Mathf.clamp(1f - mount.reload / reload);
-            float off;
+            float curve;
             if(p < swingFrac){
-                //挥出阶段：0 → swingAngle
-                off = swingAngle * (p / swingFrac);
+                //挥出阶段：0 → 1
+                curve = p / swingFrac;
             }else{
-                //归位阶段：swingAngle → 0
-                off = swingAngle * (1f - (p - swingFrac) / (1f - swingFrac));
+                //归位阶段：1 → 0
+                curve = 1f - (p - swingFrac) / (1f - swingFrac);
             }
 
-            Draw.rect(region, wx, wy, aimRot + off);
+            //取负号：右侧(原版侧)顺时针挥砍；左侧镜像副本经 xscl 翻转后自动呈逆时针
+            float swing = -swingAngle * curve;
+
+            float prev = Draw.xscl;
+            //与原版 Weapon.draw 一致：镜像侧把剑身贴图水平翻转(剑刃朝向一致)
+            Draw.xscl *= -Mathf.sign(flipSprite);
+            Draw.rect(region, wx, wy, aimRot + swing);
+            Draw.xscl = prev;
         }
     }
 }
