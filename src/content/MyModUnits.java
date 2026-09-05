@@ -42,7 +42,11 @@ public class MyModUnits{
             lifetime = 21f;         //飞行寿命(tick)：足够月牙飞满 82 距离
             rangeOverride = 82.2f;  //攻击范围：18.2 + 8格(64单位) ≈ 82.2
 
-            pierce = true;   //开启穿透：一道剑气可同时命中多个敌人
+            //穿透：建筑+单位都挡不住，且每个目标只吃一次伤害（官方 BulletComp 用 collided 集合防重复）
+            pierce = true;          //穿透单位
+            pierceBuilding = true;  //穿透建筑（默认只穿单位，建筑会挡下子弹）
+            pierceCap = -1;         //-1 = 不限穿透次数
+            collidesTiles = true;   //开启建筑碰撞判定（命中结算一次后继续飞行）
 
             hitSize = 6f;    //命中判定体积
             drag = 0f;       //无空气阻力，保持较快飞行速度
@@ -53,6 +57,15 @@ public class MyModUnits{
             trailColor = Color.valueOf("bfe9ff");
             trailLength = 12;   //较短拖尾
             trailWidth = 2.6f;  //拖尾宽度
+
+            //发光：与拖尾同色的光晕（代码实现，无需改贴图）
+            lightColor = Color.valueOf("bfe9ff"); //与拖尾同色
+            lightRadius = 26f;   //光晕半径(世界单位)，0或负则关闭
+            lightOpacity = 0.55f;//光晕强度
+
+            //把月牙贴图混白提亮，让它像拖尾一样发亮（不改贴图也能实现）
+            mixColorFrom = Color.valueOf("e8fbff").a(0.55f);
+            mixColorTo = Color.valueOf("e8fbff").a(0.55f);
 
             //不需要复杂命中特效
             hitEffect = Fx.none;
