@@ -167,8 +167,9 @@ public class MyModUnits{
                 curve = 1f - (p - swingFrac) / (1f - swingFrac);
             }
 
-            //取负号：右侧(原版侧)顺时针挥砍；左侧镜像副本经 xscl 翻转后自动呈逆时针
-            float swing = -swingAngle * curve;
+            //方向：右侧(原版侧, flipSprite=false)取负=顺时针；左侧(镜像副本, flipSprite=true)取正=逆时针。
+            //注意 xscl=-1 只做贴图镜像，并不会反转旋转方向，所以必须显式按侧别取正负号。
+            float swing = (flipSprite ? 1f : -1f) * swingAngle * curve;
 
             float prev = Draw.xscl;
             //与原版 Weapon.draw 一致：镜像侧把剑身贴图水平翻转(剑刃朝向一致)
