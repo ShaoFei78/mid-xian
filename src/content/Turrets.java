@@ -115,8 +115,8 @@ public class Turrets {
             //开火特效：炮口迸出小闪电（数量/伤害/长度/散角可在此微调）
             lightningBolts = 3;
             lightningDamage = 3f;
-            lightningLength = 3;
-            lightningSpread = 20f;
+            lightningLength = 5;
+            lightningSpread = 30f;
 
             ammo(
                     ModItem.ChiTong, new ArtilleryBulletType(8f,80f){{

@@ -33,6 +33,7 @@ public class ExampleJavaMod extends Mod{
         ModItem.load();
         Blocks.load();
         Turrets.load();
+        MyModUnits.load();
         ExSector.load();
         MyTechTree.load();
 
